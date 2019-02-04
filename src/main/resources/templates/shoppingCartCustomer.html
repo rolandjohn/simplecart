@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+<meta charset="UTF-8">
+<title>Simple Cart</title>
+<!-- Bootstrap Core CSS -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
+
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+</head>
+   <body>
+      <th:block th:include="/_header"></th:block>
+       
+      <div class="page-title">Enter Customer Information</div>
+       
+      <form method="POST" th:object = "${customerForm}" th:action="@{/shoppingCartCustomer}">
+          
+         <table>
+            <tr>
+               <td>Name *</td>
+               <td><input th:field="*{name}" /></td>
+               <td>
+                  <span class="error-message"
+                     th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
+               </td>
+            </tr>
+            <tr>
+               <td>Email *</td>
+               <td><input th:field="*{email}" /></td>
+               <td>
+                  <span class="error-message"
+                     th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
+               </td>
+            </tr>
+            <tr>
+               <td>Phone *</td>
+               <td><input th:field="*{phone}" /></td>
+               <td>
+                  <span class="error-message"
+                     th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">..</span>
+               </td>
+            </tr>
+            <tr>
+               <td>Address *</td>
+               <td><input th:field="*{address}" /></td>
+               <td>
+                  <span class="error-message"
+                     th:if="${#fields.hasErrors('address')}" th:errors="*{address}">..</span>
+               </td>
+            </tr>
+            <tr>
+               <td>&nbsp;</td>
+               <td><input type="submit" value="Submit" /> <input type="reset"
+                  value="Reset" /></td>
+            </tr>
+         </table>
+          
+      </form>
+       
+      <th:block th:include="/_footer"></th:block>
+       <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script th:src="@{/js/bootstrap.js}"></script>
+   </body>
+</html>

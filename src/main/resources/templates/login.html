@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Simple Cart</title>
+<!-- Bootstrap Core CSS -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
+
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+</head>
+   <body>
+      <th:block th:include="/_header"></th:block>
+       
+      <div class="page-title">Login (For Employee, Manager)</div>
+       
+      <div class="login-container">
+         <h3>Enter username and password</h3>
+         <br>
+         <!-- /login?error=true -->
+         <th:block th:if="${#session != null && #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
+             <div th:if= "${#request.getParameter('error') == 'true'}"
+                style="color: red; margin: 10px 0px;">
+                Login Failed!!!<br /> Reason :
+                <span th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"></span>
+             </div>
+         </th:block>
+          
+         <form method="POST"
+            th:action="@{/j_spring_security_check}">
+            <table>
+               <tr>
+                  <td>User Name *</td>
+                  <td><input name="userName" /></td>
+               </tr>
+               <tr>
+                  <td>Password *</td>
+                  <td><input type="password" name="password" /></td>
+               </tr>
+               <tr>
+                  <td>&nbsp;</td>
+                  <td>
+                      <input type="submit" value="Login" />
+                      <input type="reset"  value="Reset" />
+                  </td>
+               </tr>
+            </table>
+         </form>
+          
+         <span class="error-message" th:utext="${error}"></span>
+      </div>
+       
+      <div style="text-align:left">
+          <h3>User/Password:</h3>
+          <ul>        
+             <li>employee1/123</li>
+             <li>manager1/123</li>   
+          </ul>
+      </div>
+       
+      <th:block th:include="/_footer"></th:block>
+       <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script th:src="@{/js/bootstrap.js}"></script>
+   </body>
+</html>

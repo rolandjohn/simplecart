@@ -1,0 +1,17 @@
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm"
+ 		xmlns:th="http://www.thymeleaf.org"
+      	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+  <h5 class="my-0 mr-md-auto font-weight-normal">Simple Cart</h5>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-dark" th:href="@{/productList}">Products</a>
+    <a class="p-2 text-dark" th:href="@{/shoppingCart}">My Cart</a>
+    <a class="p-2 text-dark" th:href="@{/admin/orderList}">Orders</a>
+    <a class="p-2 text-dark" th:href="@{/admin/product}">Add New Product</a>
+  </nav>
+  <th:block sec:authorize="isAuthenticated()">
+  <a class="btn btn-outline-primary" th:href="@{/admin/logout}">Logout</a>
+  </th:block>
+   <th:block sec:authorize="!isAuthenticated()">
+  <a class="btn btn-outline-primary" th:href="@{/admin/login}">Login</a>
+  </th:block>
+</div>
