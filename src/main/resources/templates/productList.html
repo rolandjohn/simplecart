@@ -6,7 +6,10 @@
 <title>Simple Cart</title>
 <!-- Bootstrap Core CSS -->
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/product.css}" />
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+	rel="stylesheet">
 
 <style>
 .bd-placeholder-img {
@@ -23,54 +26,58 @@
 </head>
 <body>
 	<th:block th:include="/_header"></th:block>
-	<div class="album py-5 bg-light">
-		<div class="container">
 
-			<div class="row" >
-				
-				<div class="col-md-4" th:each="prodInfo : ${paginationProducts.list}">
-					<div class="card mb-4 shadow-sm">
-						<img class="bd-placeholder-img card-img-top" width="100%"
-							height="225" th:src="@{|/productImage?code=${prodInfo.code}|}" />
+	<div class="container">
+		<h3 class="h3">Products</h3>
+		<div class="row">
+			<div th:each="prodInfo : ${paginationProducts.list}"
+				class="col-md-4 col-sm-6">
+				<div class="product-grid2">
+					<div class="product-image2">
+						<a href="#"> <img class="pic-1"
+							th:src="@{|/productImage?code=${prodInfo.code}|}"> <img
+							class="pic-2" th:src="@{|/productImage?code=${prodInfo.code}|}">
+						</a>
+						<ul class="social">
 
+							<li><a th:href="@{|/buyProduct?code=${prodInfo.code}|}"
+								data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+							<li><a th:href="@{|/admin/product?code=${prodInfo.code}|}"
+								data-tip="Add to Wishlist"><i class="fa fa-edit"></i></a></li>
 
-						<div class="card-body">
-							<ul>
-
-								<li>Code: <span th:utext="${prodInfo.code}"></span></li>
-								<li>Name: <span th:utext="${prodInfo.name}"></span></li>
-								<li>Price: <span
-									th:utext="${#numbers.formatDecimal(prodInfo.price,3,2,'COMMA')}"></span></li>
-							</ul>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-									<a class="btn btn-sm btn-outline-secondary"
-										th:href="@{|/buyProduct?code=${prodInfo.code}|}">Buy</a>
-									<th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
-										<a class="btn btn-sm btn-outline-secondary"
-											th:href="@{|/admin/product?code=${prodInfo.code}|}">Edit</a>
-									</th:block>
-								</div>
-							</div>
-						</div>
+						</ul>
+						<a class="add-to-cart"
+							th:href="@{|/buyProduct?code=${prodInfo.code}|}">Add to cart</a>
+					</div>
+					<div class="product-content">
+						<h3 class="title">
+							<span th:utext="${prodInfo.code}"></span> <a href="#"><span
+								th:utext="${prodInfo.name}"></span></a>
+						</h3>
+						<span class="price">$<span
+							th:utext="${#numbers.formatDecimal(prodInfo.price,2,2)}"></span></span>
 					</div>
 				</div>
 			</div>
 
-			<br />
-			<div class="page-navigator"
-				th:if="${paginationProducts.totalPages > 1}">
-				<th:block th:each="page : ${paginationProducts.navigationPages}">
 
-					<a th:href="@{|/productList?page=${page}|}" th:if="${page != -1}"
-						class="nav-item" th:utext="${page}"></a>
-
-					<span class="nav-item" th:if="${page == -1}"> ... </span>
-
-				</th:block>
-			</div>
 		</div>
+		<br />
+
+		<nav aria-label="..." th:if="${paginationProducts.totalPages > 1}">
+			<ul class="pagination pagination-lg justify-content-center">
+				<th:block th:each="page : ${paginationProducts.navigationPages}">
+				<li class="page-item">
+						<a th:href="@{|/productList?page=${page}|}" th:if="${page != -1}"
+					class="page-link" th:utext="${page}"></a>
+					</li>
+					<span class="page-link" th:if="${page == -1}"> ... </span>
+				
+				</th:block>
+			</ul>
+		</nav>
 	</div>
+
 	<th:block th:include="/_footer"></th:block>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

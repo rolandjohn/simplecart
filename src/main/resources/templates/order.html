@@ -13,55 +13,62 @@
 	text-anchor: middle;
 }
 
-@media ( min-width : 768px) {
+@media ( min-width : 992px) {
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
 	}
 }
 </style>
 </head>
-   <body>
-      <th:block th:include="/_header"></th:block>
-       
-      <div class="page-title">Order Info</div>
-       
-      <div class="customer-info-container">
-         <h3>Customer Information:</h3>
-         <ul>
-            <li>Name: <span th:utext="${orderInfo.customerName}"></span></li>
-            <li>Email: <span th:utext="${orderInfo.customerEmail}"></span></li>
-            <li>Phone: <span th:utext="${orderInfo.customerPhone}"></span></li>
-            <li>Address: <span th:utext="${orderInfo.customerAddress}"></span></li>
-         </ul>
-         <h3>Order Summary:</h3>
-         <ul>
-            <li>Total:
-               <span class="total" th:utext="${#numbers.formatDecimal(orderInfo.amount,3,2,'COMMA')}">         
-               </span>
-            </li>
-         </ul>
-      </div>
-      <br/>
-      <table border="1" style="width:100%">
-         <tr>
-            <th>Product Code</th>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Amount</th>
-         </tr>
-         <tr th:each="orderDetailInfo : ${orderInfo.details}">
-            <td th:utext="${orderDetailInfo.productCode}"></td>
-            <td th:utext="${orderDetailInfo.productName}"></td>
-            <td th:utext="${orderDetailInfo.quanity}"></td>
-            <td th:utext="${#numbers.formatDecimal(orderDetailInfo.price,3,2,'COMMA')}"></td>
-            <td th:utext="${#numbers.formatDecimal(orderDetailInfo.amount,3,2,'COMMA')}"></td>
-         </tr>
-      </table>
-       
-      <th:block th:include="/_footer"></th:block>
-       <script
+<body>
+	<th:block th:include="/_header"></th:block>
+	<div class="container">
+		<div class="page-title"><h3 class="text-center">Order Info</h3></div>
+		<br>
+
+		<div class="customer-info-container">
+			<h3>Customer Information:</h3>
+			<ul>
+				<li>Name: <span th:utext="${orderInfo.customerName}"></span></li>
+				<li>Email: <span th:utext="${orderInfo.customerEmail}"></span></li>
+				<li>Phone: <span th:utext="${orderInfo.customerPhone}"></span></li>
+				<li>Address: <span th:utext="${orderInfo.customerAddress}"></span></li>
+			</ul>
+			<h3>Order Summary:</h3>
+			<ul>
+				<li>Total: <span class="total"
+					th:utext="${#numbers.formatDecimal(orderInfo.amount,2,2)}">
+				</span>
+				</li>
+			</ul>
+		</div>
+		<br />
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Product Code</th>
+					<th>Product Name</th>
+					<th>Quantity</th>
+					<th>Price</th>
+					<th>Amount</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="orderDetailInfo : ${orderInfo.details}">
+					<td th:utext="${orderDetailInfo.productCode}"></td>
+					<td th:utext="${orderDetailInfo.productName}"></td>
+					<td th:utext="${orderDetailInfo.quanity}"></td>
+					<td
+						th:utext="${#numbers.formatDecimal(orderDetailInfo.price,2,2)}"></td>
+					<td
+						th:utext="${#numbers.formatDecimal(orderDetailInfo.amount,2,2)}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<th:block th:include="/_footer"></th:block>
+	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script th:src="@{/js/bootstrap.js}"></script>
-   </body>
+</body>
 </html>
