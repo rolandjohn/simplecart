@@ -7,9 +7,11 @@
 <!-- Bootstrap Core CSS -->
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" th:href="@{/product.css}" />
-<link
-	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
-	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+	integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+	crossorigin="anonymous">
+
 
 <style>
 .bd-placeholder-img {
@@ -22,6 +24,17 @@
 		font-size: 3.5rem;
 	}
 }
+
+.form-control-borderless {
+	border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active,
+	.form-control-borderless:focus {
+	border: none;
+	outline: none;
+	box-shadow: none;
+}
 </style>
 </head>
 <body>
@@ -29,6 +42,34 @@
 
 	<div class="container">
 		<h3 class="h3">Products</h3>
+
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-10 col-lg-8">
+				<form class="card card-sm" method="GET" th:action="@{/productList}">
+					<div class="card-body row no-gutters align-items-center">
+						<div class="col-auto">
+							<i class="fas fa-search h4 text-body"></i>
+						</div>
+						<!--end of col-->
+						<div class="col">
+							<input
+								class="form-control form-control-lg form-control-borderless"
+								type="search" name="name" placeholder="Search for Products">
+						</div>
+						<!--end of col-->
+						<div class="col-auto">
+							<button class="btn btn-lg btn-success" type="submit">Search</button>
+						</div>
+						<!--end of col-->
+					</div>
+				</form>
+			</div>
+			<!--end of col-->
+		</div>
+
+		<br>
+		<br>
+		
 		<div class="row">
 			<div th:each="prodInfo : ${paginationProducts.list}"
 				class="col-md-4 col-sm-6">
@@ -42,8 +83,12 @@
 
 							<li><a th:href="@{|/buyProduct?code=${prodInfo.code}|}"
 								data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
-							<li><a th:href="@{|/admin/product?code=${prodInfo.code}|}"
-								data-tip="Add to Wishlist"><i class="fa fa-edit"></i></a></li>
+							<li>
+							<th:block sec:authorize="isAuthenticated()">
+							<a th:href="@{|/admin/product?code=${prodInfo.code}|}"
+								data-tip="Edit Product"><i class="fa fa-edit"></i></a>
+							</th:block>	
+							</li>
 
 						</ul>
 						<a class="add-to-cart"
@@ -67,12 +112,11 @@
 		<nav aria-label="..." th:if="${paginationProducts.totalPages > 1}">
 			<ul class="pagination pagination-lg justify-content-center">
 				<th:block th:each="page : ${paginationProducts.navigationPages}">
-				<li class="page-item">
-						<a th:href="@{|/productList?page=${page}|}" th:if="${page != -1}"
-					class="page-link" th:utext="${page}"></a>
-					</li>
+					<li class="page-item"><a
+						th:href="@{|/productList?page=${page}|}" th:if="${page != -1}"
+						class="page-link" th:utext="${page}"></a></li>
 					<span class="page-link" th:if="${page == -1}"> ... </span>
-				
+
 				</th:block>
 			</ul>
 		</nav>

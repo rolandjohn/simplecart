@@ -112,7 +112,8 @@
 
 						<td colspan="3" class="hidden-xs"></td>
 						<td class="hidden-xs text-center"><strong>Total
-								$1.99</strong></td>
+								$<span class="total"
+					th:utext="${#numbers.formatDecimal(myCart.amountTotal,2,2)}"></span></strong></td>
 
 					</tr>
 					<tr>

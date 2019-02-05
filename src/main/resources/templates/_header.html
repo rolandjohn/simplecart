@@ -6,8 +6,10 @@
   	<a class="p-2 text-dark" th:href="@{/}">Home</a>
     <a class="p-2 text-dark" th:href="@{/productList}">Products</a>
     <a class="p-2 text-dark" th:href="@{/shoppingCart}">My Cart</a>
+    <th:block sec:authorize="isAuthenticated()">
     <a class="p-2 text-dark" th:href="@{/admin/orderList}">Orders</a>
     <a class="p-2 text-dark" th:href="@{/admin/product}">Add New Product</a>
+    </th:block>
   </nav>
   <th:block sec:authorize="isAuthenticated()">
   <a class="btn btn-outline-primary" th:href="@{/admin/logout}">Logout</a>

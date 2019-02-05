@@ -5,7 +5,6 @@
 <title>Simple Cart</title>
 <!-- Bootstrap Core CSS -->
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
 
 <style>
 .bd-placeholder-img {
@@ -36,7 +35,7 @@
 			</ul>
 			<h3>Order Summary:</h3>
 			<ul>
-				<li>Total: <span class="total"
+				<li>Total: $<span class="total"
 					th:utext="${#numbers.formatDecimal(orderInfo.amount,2,2)}">
 				</span>
 				</li>
@@ -58,10 +57,8 @@
 					<td th:utext="${orderDetailInfo.productCode}"></td>
 					<td th:utext="${orderDetailInfo.productName}"></td>
 					<td th:utext="${orderDetailInfo.quanity}"></td>
-					<td
-						th:utext="${#numbers.formatDecimal(orderDetailInfo.price,2,2)}"></td>
-					<td
-						th:utext="${#numbers.formatDecimal(orderDetailInfo.amount,2,2)}"></td>
+					<td>$<span th:utext="${#numbers.formatDecimal(orderDetailInfo.price,2,2)}"></</span></td>
+					<td>$<span th:utext="${#numbers.formatDecimal(orderDetailInfo.amount,2,2)}"></span></td>
 				</tr>
 			</tbody>
 		</table>
