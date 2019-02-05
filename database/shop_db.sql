@@ -28,8 +28,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 -- Dumping data for table shop_db.accounts: ~2 rows (approximately)
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
 INSERT INTO `accounts` (`USER_NAME`, `ACTIVE`, `ENCRYTED_PASSWORD`, `USER_ROLE`) VALUES
-	('employee1', b'1', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', 'ROLE_EMPLOYEE'),
-	('manager1', b'1', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', 'ROLE_MANAGER');
+	('employee', b'1', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', 'ROLE_EMPLOYEE'),
+	('manager', b'1', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', 'ROLE_MANAGER');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
 -- Dumping structure for table shop_db.orders
@@ -52,6 +52,7 @@ INSERT INTO `orders` (`ID`, `AMOUNT`, `CUSTOMER_ADDRESS`, `CUSTOMER_EMAIL`, `CUS
 	('06417571-645c-4a71-a481-14979d35c95d', 50, 'purok saranay methodist Church, Namnama', 'rolandjohn111@gmail.com', 'Roland Gaspar', '123456789', '2019-02-03 23:35:13', 3),
 	('0a8a38c5-a88d-4998-988f-bae45d0a4a1d', 120, 'purok saranay methodist Church, Namnama', 'rolandjohn111@gmail.com', 'Roland Gaspar', '123456789', '2019-02-03 23:34:37', 2),
 	('bbb8ec13-775a-482d-a13a-eb2aa70cf5f7', 200, 'purok saranay methodist Church, Namnama', 'rolandjohn111@gmail.com', 'Roland Gaspar', '123456789', '2019-02-02 18:46:48', 1),
+	('e48c3f69-e236-44df-9f06-5fb238f02801', 1600, 'testing lang', 'roland@gmail.com', 'oland john', '39420489', '2019-02-05 16:53:43', 5),
 	('f188cbcb-5dae-4317-be8a-5caaac9cbf79', 1100, 'testing address', 'test@gmail.com', 'test', '30948204890', '2019-02-05 16:41:12', 4);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
@@ -74,11 +75,14 @@ CREATE TABLE IF NOT EXISTS `order_details` (
 /*!40000 ALTER TABLE `order_details` DISABLE KEYS */;
 INSERT INTO `order_details` (`ID`, `AMOUNT`, `PRICE`, `QUANITY`, `ORDER_ID`, `PRODUCT_ID`) VALUES
 	('72da6fae-9832-4b40-aa93-729ad3b1926a', 100, 100, 1, 'bbb8ec13-775a-482d-a13a-eb2aa70cf5f7', 'S001'),
+	('94f2a6d2-0f40-45f0-92e3-41706c606814', 400, 400, 1, 'e48c3f69-e236-44df-9f06-5fb238f02801', 'S004'),
 	('a48b6dee-f2de-4bf1-adf7-73362bda7aef', 50, 50, 1, '06417571-645c-4a71-a481-14979d35c95d', 'S002'),
+	('aa301266-ef8b-412e-a6a3-f779f3477ca5', 700, 700, 1, 'e48c3f69-e236-44df-9f06-5fb238f02801', 'S007'),
 	('b65fc376-1a34-4c58-9dbd-f89a94dab104', 100, 50, 2, 'bbb8ec13-775a-482d-a13a-eb2aa70cf5f7', 'S002'),
 	('daa65903-d644-4f3f-a5ac-1ad50857771d', 120, 120, 1, '0a8a38c5-a88d-4998-988f-bae45d0a4a1d', 'S004'),
 	('f69a923c-0ac3-4c2c-8b6e-6e04e92ded2e', 400, 400, 1, 'f188cbcb-5dae-4317-be8a-5caaac9cbf79', 'S004'),
-	('faca8356-cdb1-4fd8-937f-55140c09fb41', 700, 700, 1, 'f188cbcb-5dae-4317-be8a-5caaac9cbf79', 'S007');
+	('faca8356-cdb1-4fd8-937f-55140c09fb41', 700, 700, 1, 'f188cbcb-5dae-4317-be8a-5caaac9cbf79', 'S007'),
+	('fc99d0c3-99c8-4393-98d8-38569c0f22be', 500, 500, 1, 'e48c3f69-e236-44df-9f06-5fb238f02801', 'S005');
 /*!40000 ALTER TABLE `order_details` ENABLE KEYS */;
 
 -- Dumping structure for table shop_db.products
