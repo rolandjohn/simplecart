@@ -112,7 +112,7 @@
 		<nav aria-label="..." th:if="${paginationProducts.totalPages > 1}">
 			<ul class="pagination pagination-lg justify-content-center">
 				<th:block th:each="page : ${paginationProducts.navigationPages}">
-					<li class="page-item"><a
+					<li class="page-item" th:classappend="${currentPage} == ${page}?'active': ''"><a
 						th:href="@{|/productList?page=${page}|}" th:if="${page != -1}"
 						class="page-link" th:utext="${page}"></a></li>
 					<span class="page-link" th:if="${page == -1}"> ... </span>

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,18 +66,18 @@ public class MainController {
  
    }
  
-   @RequestMapping("/403")
+   @GetMapping("/403")
    public String accessDenied() {
       return "/403";
    }
  
-   @RequestMapping("/")
+   @GetMapping("/")
    public String home() {
       return "index";
    }
  
    // Product List
-   @RequestMapping({ "/productList" })
+   @GetMapping({ "/productList" })
    public String listProductHandler(Model model, //
          @RequestParam(value = "name", defaultValue = "") String likeName,
          @RequestParam(value = "page", defaultValue = "1") int page) {
@@ -85,12 +86,12 @@ public class MainController {
  
       PaginationResult<ProductInfo> result = productDAO.queryProducts(page, //
             maxResult, maxNavigationPage, likeName);
- 
+      model.addAttribute("currentPage", page);
       model.addAttribute("paginationProducts", result);
       return "productList";
    }
  
-   @RequestMapping({ "/buyProduct" })
+   @GetMapping({ "/buyProduct" })
    public String listProductHandler(HttpServletRequest request, Model model, //
          @RequestParam(value = "code", defaultValue = "") String code) {
  
@@ -111,7 +112,7 @@ public class MainController {
       return "redirect:/shoppingCart";
    }
  
-   @RequestMapping({ "/shoppingCartRemoveProduct" })
+   @GetMapping({ "/shoppingCartRemoveProduct" })
    public String removeProductHandler(HttpServletRequest request, Model model, //
          @RequestParam(value = "code", defaultValue = "") String code) {
       Product product = null;
