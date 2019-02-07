@@ -6,7 +6,10 @@
 <title>Simple Cart</title>
 <!-- Bootstrap Core CSS -->
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
+
 <link rel="stylesheet" type="text/css" th:href="@{/product.css}" />
+
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
 	integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
@@ -42,7 +45,12 @@
 
 	<div class="container">
 		<h3 class="h3">Products</h3>
-
+		<div id="cart-container">
+			<div id="cart">
+				<i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+			</div>
+			<span id="itemCount"></span>
+		</div>
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-10 col-lg-8">
 				<form class="card card-sm" method="GET" th:action="@{/productList}">
@@ -67,32 +75,33 @@
 			<!--end of col-->
 		</div>
 
-		<br>
-		<br>
-		
+		<br> <br>
+		<div id="alert-area"></div>
+
 		<div class="row">
 			<div th:each="prodInfo : ${paginationProducts.list}"
 				class="col-md-4 col-sm-6">
 				<div class="product-grid2">
 					<div class="product-image2">
-						<a href="#"> <img class="pic-1"
-							th:src="@{|/productImage?code=${prodInfo.code}|}"> <img
-							class="pic-2" th:src="@{|/productImage?code=${prodInfo.code}|}">
+						<a href="#"> <img
+							class="pic-1" th:src="@{|/productImage?code=${prodInfo.code}|}">
+							<img class="pic-2"
+							th:src="@{|/productImage?code=${prodInfo.code}|}">
 						</a>
 						<ul class="social">
-
-							<li><a th:href="@{|/buyProduct?code=${prodInfo.code}|}"
+							<!-- <li><a href="#"
+								class="btnViewProduct" data-tip="View Details"><i
+									class="fa fa-eye"></i></a></li> -->
+							<li><a th:href="@{|${prodInfo.code}|}" class="btnAddCart"
 								data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
-							<li>
-							<th:block sec:authorize="isAuthenticated()">
-							<a th:href="@{|/admin/product?code=${prodInfo.code}|}"
-								data-tip="Edit Product"><i class="fa fa-edit"></i></a>
-							</th:block>	
-							</li>
+							<li><th:block sec:authorize="isAuthenticated()">
+									<a th:href="@{|/admin/product?code=${prodInfo.code}|}"
+										data-tip="Edit Product"><i class="fa fa-edit"></i></a>
+								</th:block></li>
 
 						</ul>
 						<a class="add-to-cart"
-							th:href="@{|/buyProduct?code=${prodInfo.code}|}">Add to cart</a>
+							th:href="@{|/buyProduct?code=${prodInfo.code}|}">Buy Now</a>
 					</div>
 					<div class="product-content">
 						<h3 class="title">
@@ -103,16 +112,18 @@
 							th:utext="${#numbers.formatDecimal(prodInfo.price,2,2)}"></span></span>
 					</div>
 				</div>
+
+
 			</div>
-
-
+			
 		</div>
 		<br />
 
 		<nav aria-label="..." th:if="${paginationProducts.totalPages > 1}">
 			<ul class="pagination pagination-lg justify-content-center">
 				<th:block th:each="page : ${paginationProducts.navigationPages}">
-					<li class="page-item" th:classappend="${currentPage} == ${page}?'active': ''"><a
+					<li class="page-item"
+						th:classappend="${currentPage} == ${page}?'active': ''"><a
 						th:href="@{|/productList?page=${page}|}" th:if="${page != -1}"
 						class="page-link" th:utext="${page}"></a></li>
 					<span class="page-link" th:if="${page == -1}"> ... </span>
@@ -126,6 +137,9 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script th:src="@{/js/bootstrap.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
+	
 
 </body>
 </html>

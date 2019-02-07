@@ -53,14 +53,18 @@
 			</tr>
 		</tbody>
 		</table>
-		<div class="page-navigator" th:if="${paginationResult.totalPages > 1}">
-			<th:block th:each="page: ${paginationResult.navigationPages}">
-				<a th:if="${page != -1}" class="nav-item"
-					th:href="@{|/admin/orderList?page=${page}|}" th:utext="${page}"></a>
+		<nav aria-label="..." th:if="${paginationResult.totalPages > 1}">
+			<ul class="pagination pagination-lg justify-content-center">
+				<th:block th:each="page : ${paginationResult.navigationPages}">
+					<li class="page-item" th:classappend="${currentPage} == ${page}?'active': ''"><a
+						th:href="@{|/admin/orderList?page=${page}|}" th:if="${page != -1}"
+						class="page-link" th:utext="${page}"></a></li>
+					<span class="page-link" th:if="${page == -1}"> ... </span>
 
-				<span th:if="${page == -1}" class="nav-item"> ... </span>
-			</th:block>
-		</div>
+				</th:block>
+			</ul>
+		</nav>
+		
 	</div>
 
 
