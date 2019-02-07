@@ -8,7 +8,11 @@
     <a class="p-2 text-dark" th:href="@{/shoppingCart}">My Cart</a>
     <th:block sec:authorize="isAuthenticated()">
     <a class="p-2 text-dark" th:href="@{/admin/orderList}">Orders</a>
+
+    <th:block sec:authorize="hasRole('ROLE_MANAGER')">
     <a class="p-2 text-dark" th:href="@{/admin/product}">Add New Product</a>
+    </th:block>
+
     </th:block>
   </nav>
   <th:block sec:authorize="isAuthenticated()">
