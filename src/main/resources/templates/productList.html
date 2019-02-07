@@ -95,7 +95,7 @@
 							<li><a th:href="@{|${prodInfo.code}|}" class="btnAddCart"
 								data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
 							<li><th:block sec:authorize="isAuthenticated()">
-									<a th:href="@{|/admin/product?code=${prodInfo.code}|}"
+									<a th:href="@{|/admin/product? code=${prodInfo.code}|}"
 										data-tip="Edit Product"><i class="fa fa-edit"></i></a>
 								</th:block></li>
 
