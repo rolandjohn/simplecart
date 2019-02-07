@@ -90,6 +90,7 @@ public class AdminController {
             = orderDAO.listOrderInfo(page, MAX_RESULT, MAX_NAVIGATION_PAGE);
  
       model.addAttribute("paginationResult", paginationResult);
+      model.addAttribute("currentPage", page);
       return "orderList";
    }
  
